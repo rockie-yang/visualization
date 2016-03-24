@@ -1,6 +1,11 @@
-node_modules
 dist
-.tmp
+node_modules
+
+
+.DS_Store
+.publish
 .sass-cache
+.tmp
+
 bower_components
 test/bower_components

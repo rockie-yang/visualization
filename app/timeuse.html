@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>visualization</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/timeusestyle.css">
+    <!-- endbuild -->
+    
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <div id="main-wrapper">
+        <div id="sidebar">
+            <div id="current_time">4:00am</div>
+            <div id="speed">
+                <div class="togglebutton slow current" data-val="slow">Slow</div>
+                <div class="togglebutton medium" data-val="medium">Medium</div>
+                <div class="togglebutton fast" data-val="fast">Fast</div>
+                <div class="clr"></div>
+            </div>
+            <div id="note"></div>
+            <div id="cite">
+                This is a simulation of 1,000 people's average day. It's based on 2014 data from the <a href="http://www.bls.gov/tus/">American Time Use Survey</a>, made way more accessible by the <a href="https://www.atusdata.org/">ATUS Extract Builder</a>.
+            </div>
+        </div>
+        <div id="chart"></div>
+        <div class="clr"></div>
+    </div>
+    
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/plugins.js -->
+    <script src="/bower_components/bootstrap/js/affix.js"></script>
+    <script src="/bower_components/bootstrap/js/alert.js"></script>
+    <script src="/bower_components/bootstrap/js/dropdown.js"></script>
+    <script src="/bower_components/bootstrap/js/tooltip.js"></script>
+    <script src="/bower_components/bootstrap/js/modal.js"></script>
+    <script src="/bower_components/bootstrap/js/transition.js"></script>
+    <script src="/bower_components/bootstrap/js/button.js"></script>
+    <script src="/bower_components/bootstrap/js/popover.js"></script>
+    <script src="/bower_components/bootstrap/js/carousel.js"></script>
+    <script src="/bower_components/bootstrap/js/scrollspy.js"></script>
+    <script src="/bower_components/bootstrap/js/collapse.js"></script>
+    <script src="/bower_components/bootstrap/js/tab.js"></script>
+    <!-- endbuild -->
+    
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/timeuse.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>

@@ -81,7 +81,7 @@ var label = svg.append("text")
     .text(0);
 
 // Load the data.
-d3.json("data/mockdpi.json", function(nations) {
+d3.json("data/mockdpi5.json", function(nations) {
 
     // A bisector since many nation's data is sparsely-defined.
     var bisect = d3.bisector(function(d) {
@@ -192,7 +192,7 @@ d3.json("data/mockdpi.json", function(nations) {
     // After the transition finishes, you can mouseover to change the year.
     function enableInteraction() {
         var yearScale = d3.scale.linear()
-            .domain([0, 96])
+            .domain([0, 96 * 3])
             .range([box.x + 10, box.x + box.width - 10])
             .clamp(true);
 
@@ -221,15 +221,15 @@ d3.json("data/mockdpi.json", function(nations) {
     // Tweens the entire chart by first tweening the year, and then the data.
     // For the interpolated data, the dots and label are redrawn.
     function tweenYear() {
-        var year = d3.interpolateNumber(0, 96);
+        var year = d3.interpolateNumber(0, 96 * 3);
         return function(t) { displayYear(year(t)); };
     }
 
     // Updates the display to show the specified year.
     function displayYear(year) {
         dot.data(interpolateData(year), key).call(position).sort(order);
-        var hour = parseInt(parseInt(year) / 4);
-        var minute = parseInt(parseInt(year) % 4 * 15);
+        var hour = parseInt(parseInt(year) / 12);
+        var minute = parseInt(parseInt(year) % 12 * 5);
         var hourStr = hour
         if (hour < 10) {
           hourStr = "0" + hour;

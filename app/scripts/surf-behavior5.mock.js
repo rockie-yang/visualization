@@ -30,7 +30,7 @@ var margin = { top: 19.5, right: 19.5, bottom: 19.5, left: 39.5 },
 // Various scales. These domains make assumptions of data, naturally.
 var xScale = d3.scale.linear().domain(numUser).range([5, width]),
     yScale = d3.scale.linear().domain(avgSize).range([height - 10, 0]),
-    radiusScale = d3.scale.sqrt().domain(sumSize).range([0, 40]),
+    radiusScale = d3.scale.sqrt().domain(sumSize).range([1, 40]),
     colorScale = d3.scale.category20();
 
 // The x & y axes.
@@ -167,11 +167,11 @@ d3.json("data/mockdpi5.json", function(nations) {
     // Positions the dots based on data.
     function position(dot) {
         dot.attr("cx", function(d) {
-                return xScale(x(d)); })
+                return xScale(Math.max(x(d), 0)); })
             .attr("cy", function(d) {
-                return yScale(y(d)); })
+                return yScale(Math.max(y(d), 0)); })
             .attr("r", function(d) {
-                return radiusScale(radius(d)) + 2; });
+                return radiusScale(Math.max(radius(d), 0)); });
     }
 
     // Positions the dots based on data.
@@ -192,7 +192,7 @@ d3.json("data/mockdpi5.json", function(nations) {
     // After the transition finishes, you can mouseover to change the year.
     function enableInteraction() {
         var yearScale = d3.scale.linear()
-            .domain([0, 96 * 3])
+            .domain([0, 96 * 3 - 1])
             .range([box.x + 10, box.x + box.width - 10])
             .clamp(true);
 
@@ -221,7 +221,7 @@ d3.json("data/mockdpi5.json", function(nations) {
     // Tweens the entire chart by first tweening the year, and then the data.
     // For the interpolated data, the dots and label are redrawn.
     function tweenYear() {
-        var year = d3.interpolateNumber(0, 96 * 3);
+        var year = d3.interpolateNumber(0, 96 * 3 - 1);
         return function(t) { displayYear(year(t)); };
     }
 
@@ -246,7 +246,6 @@ d3.json("data/mockdpi5.json", function(nations) {
     function interpolateData(year) {
         return nations.map(function(d) {
             return {
-                functionality: d.functionality,
                 functionality: d.functionality,
                 timeNumUser: interpolateValues(d.timeNumUser, year),
                 timeSumSize: interpolateValues(d.timeSumSize, year),

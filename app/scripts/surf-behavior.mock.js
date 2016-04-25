@@ -2,22 +2,27 @@
 
 // Various accessors that specify the four dimensions of data to visualize.
 function x(d) {
-    return d.timeNumUser; }
+    return d.timeNumUser;
+}
 
 function y(d) {
-    return d.timeAvgSize; }
+    return d.timeAvgSize;
+}
 
 function radius(d) {
-    return d.timeSumSize; }
+    return d.timeSumSize;
+}
 
 function color(d) {
-    return d.functionality; }
+    return d.functionality;
+}
 
 function key(d) {
-    return d.functionality; }
+    return d.functionality;
+}
 
 var numUser = [0, 10000];
-    // numPacket = [0, 2000000],
+// numPacket = [0, 2000000],
 var avgSize = [0, 1200];
 var sumSize = [0, 1000000000];
 
@@ -30,7 +35,7 @@ var margin = { top: 19.5, right: 19.5, bottom: 19.5, left: 39.5 },
 // Various scales. These domains make assumptions of data, naturally.
 var xScale = d3.scale.linear().domain(numUser).range([5, width]),
     yScale = d3.scale.linear().domain(avgSize).range([height - 10, 0]),
-    radiusScale = d3.scale.sqrt().domain(sumSize).range([0, 40]),
+    radiusScale = d3.scale.sqrt().domain(sumSize).range([2, 40]),
     colorScale = d3.scale.category20();
 
 // The x & y axes.
@@ -85,7 +90,8 @@ d3.json("data/mockdpi.json", function(nations) {
 
     // A bisector since many nation's data is sparsely-defined.
     var bisect = d3.bisector(function(d) {
-        return d[0]; });
+        return d[0];
+    });
 
     // Add a dot per nation. Initialize the data at 1800, and set the colors.
     // var item = svg.append("g")
@@ -121,7 +127,8 @@ d3.json("data/mockdpi.json", function(nations) {
         .enter().append("circle")
         .attr("class", "dot")
         .style("fill", function(d) {
-            return colorScale(color(d)); })
+            return colorScale(color(d));
+        })
         .call(position)
         .sort(order);
 
@@ -129,22 +136,23 @@ d3.json("data/mockdpi.json", function(nations) {
     // Add a title.
     dot.append("title")
         .text(function(d) {
-            return d.functionality; });
+            return d.functionality;
+        });
 
     // var legend = svg.append("g")
     //     .attr("class", "legend")
     //     .selectAll(".legend")
     //     .data(interpolateData(0))
-        // .enter().append("text")
-        // .text(function(d){
-        //   return d.functionality;
-        // })
-        // .attr("class", "legend")
-        // .style("fill", function(d){
-        //   return colorScale(color(d));
-        // })
-        // .call(positionLegend)
-        // .sort(order);
+    // .enter().append("text")
+    // .text(function(d){
+    //   return d.functionality;
+    // })
+    // .attr("class", "legend")
+    // .style("fill", function(d){
+    //   return colorScale(color(d));
+    // })
+    // .call(positionLegend)
+    // .sort(order);
 
     // Add an overlay for the year label.
     var box = label.node().getBBox();
@@ -167,21 +175,21 @@ d3.json("data/mockdpi.json", function(nations) {
     // Positions the dots based on data.
     function position(dot) {
         dot.attr("cx", function(d) {
-                return xScale(x(d)); })
+                return xScale(Math.max(x(d), 0)); })
             .attr("cy", function(d) {
-                return yScale(y(d)); })
+                return yScale(Math.max(y(d), 0)); })
             .attr("r", function(d) {
-                return radiusScale(radius(d)) + 2; });
+                return radiusScale(Math.max(radius(d), 0)); });
     }
 
     // Positions the dots based on data.
     function positionLegend(legend) {
         legend.attr("x", function(d) {
-                return xScale(x(d)); 
-              })
+                return xScale(x(d));
+            })
             .attr("y", function(d) {
-                return yScale(y(d)); 
-              });
+                return yScale(y(d));
+            });
     }
 
     // Defines a sort order so that the smallest dots are drawn on top.
@@ -230,13 +238,13 @@ d3.json("data/mockdpi.json", function(nations) {
         dot.data(interpolateData(year), key).call(position).sort(order);
         var hour = parseInt(parseInt(year) / 4);
         var minute = parseInt(parseInt(year) % 4 * 15);
-        var hourStr = hour
+        var hourStr = hour;
         if (hour < 10) {
-          hourStr = "0" + hour;
+            hourStr = "0" + hour;
         }
         var minStr = minute;
         if (minute < 10) {
-          minStr = "0" + minute;
+            minStr = "0" + minute;
         }
 
         label.text(hourStr + ":" + minStr);
@@ -246,7 +254,6 @@ d3.json("data/mockdpi.json", function(nations) {
     function interpolateData(year) {
         return nations.map(function(d) {
             return {
-                functionality: d.functionality,
                 functionality: d.functionality,
                 timeNumUser: interpolateValues(d.timeNumUser, year),
                 timeSumSize: interpolateValues(d.timeSumSize, year),

@@ -1,0 +1,18 @@
+{
+"globals": {
+    "$": false,
+    "d3": false,
+    "jQuery": false,
+
+},
+"rules": {
+        "eqeqeq": "off",
+        "curly": "error",
+        "no-use-before-define": "warn",
+        "no-unused-vars": "warn",
+        "no-shadow": "warn",
+        "no-trailing-spaces": "warn",
+        "quotes": ["off", "double"],
+        "semi": "warn"
+}
+}

@@ -21,7 +21,7 @@ function key(d) {
     return d.functionality;
 }
 
-var numUser = [0, 10000];
+var numUser = [0, 6000];
 // numPacket = [0, 2000000],
 var avgSize = [0, 1200];
 var sumSize = [0, 1000000000];
